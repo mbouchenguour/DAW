@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question id="1">
+    <titre>Quel est l'année de sortie de Java ?</titre>
+    <choix correct="B">
+      <A>1990</A>
+      <B>1995</B>
+      <C>2000</C>
+      <D>2005</D>
+    </choix>
+  </question>
+  <question id="2">
+    <titre>Quelle est la signification de JVM en Java ?</titre>
+    <choix correct="C">
+      <A>Java Virtual Memory</A>
+      <B>Java Variable Manager</B>
+      <C>Java Virtual Machine</C>
+      <D>Java Vector Math</D>
+    </choix>
+  </question>
+  <question id="3">
+    <titre>Quelle est la différence entre une classe abstraite et une interface en Java ?</titre>
+    <choix correct="C">
+      <A>Une classe abstraite ne peut pas avoir de méthodes, pas une interface</A>
+      <B>Une interface peut être instanciée, pas une classe abstraite</B>
+      <C>Une classe abstraite peut avoir des implémentations de méthode, pas une interface</C>
+      <D>Une interface peut étendre une autre interface, pas une classe abstraite</D>
+    </choix>
+  </question>
+  <question id="4">
+    <titre>Qu'est-ce que la méthode equals() en Java ?</titre>
+    <choix correct="B">
+      <A>Une méthode qui compare deux objets et renvoie true si leur référence mémoire est la même</A>
+      <B>Une méthode qui compare deux objets et renvoie true si leur contenu est équivalent</B>
+      <C>Une méthode qui renvoie la longueur d'une chaîne de caractères</C>
+      <D>Une méthode qui retourne la valeur entière de la partie décimale d'un nombre</D>
+    </choix>
+  </question>
+  <question id="5">
+    <titre>Qu'est-ce qu'un thread en Java ?</titre>
+    <choix correct="A">
+      <A>Un processus léger qui permet l'exécution simultanée de plusieurs tâches</A>
+      <B>Un objet qui contient des données et des méthodes</B>
+      <C>Une interface qui permet de créer des classes abstraites</C>
+      <D>Un constructeur qui permet d'instancier une classe</D>
+    </choix>
+  </question>
+  <question id="6">
+    <titre>Qu'est-ce qu'une exception en Java ?</titre>
+    <choix correct="C">
+      <A>Un objet qui contient des données et des méthodes</A>
+      <B>Un constructeur qui permet d'instancier une classe</B>
+      <C>Un événement qui se produit lorsqu'une erreur se produit pendant l'exécution d'un programme</C>
+      <D>Une méthode qui permet de manipuler des chaînes de caractères</D>
+    </choix>
+  </question>
+ <question id="7">
+    <titre>Qu'est-ce que la surcharge de méthode en Java ?</titre>
+    <choix correct="B">
+      <A>Le fait de réécrire une méthode dans une sous-classe</A>
+      <B>Le fait de définir plusieurs méthodes avec le même nom dans une classe, mais avec des signatures différentes</B>
+      <C>Le fait de définir une méthode avec le même nom et la même signature dans une classe et dans une sous-classe</C>
+      <D>Le fait de définir une méthode dans une interface et de la réimplémenter dans une classe</D>
+    </choix>
+ </question>
+  <question id="8">
+    <titre>Quelle est la différence entre une ArrayList et un tableau en Java ?</titre>
+    <choix correct="C">
+      <A>Une ArrayList peut être triée, pas un tableau</A>
+      <B>Un tableau peut contenir des éléments de différents types, pas une ArrayList</B>
+      <C>Une ArrayList peut être redimensionnée dynamiquement, pas un tableau</C>
+      <D>Un tableau peut être parcouru avec une boucle for-each, pas une ArrayList</D>
+    </choix>
+  </question>
+</quiz>

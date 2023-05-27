@@ -1,0 +1,312 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : ven. 05 mai 2023 à 16:26
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `formation`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `chapitres`
+--
+
+DROP TABLE IF EXISTS `chapitres`;
+CREATE TABLE IF NOT EXISTS `chapitres` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `cours_id` int NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `type_fichier` enum('pdf','pptx','mp4','mp3') NOT NULL,
+  `url_fichier` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `cours_id` (`cours_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `chapitres`
+--
+
+INSERT INTO `chapitres` (`id`, `cours_id`, `titre`, `type_fichier`, `url_fichier`) VALUES
+(1, 1, 'Déclaration de classe', 'pdf', 'fichiers/Java/Déclaration de classe.pdf'),
+(2, 1, 'Installation de Java', 'mp4', 'fichiers/Java/Installation de Java.mp4'),
+(3, 2, 'Variables et types', 'pdf', 'fichiers/Python/Variables et types.pdf'),
+(4, 2, 'Fonctions et boucles', 'mp3', 'fichiers/Python/Fonctions et boucles.mp3'),
+(5, 3, 'Introduction à HTML', 'pdf', 'fichiers/HtmlCSS/Introduction à HTML.pdf'),
+(6, 3, 'Mise en page avec CSS', 'mp3', 'fichiers/HtmlCSS/Mise en page avec CSS.mp3'),
+(7, 4, 'Requêtes SELECT', 'pdf', 'fichiers/JavaScript/Requêtes SELECT.pdf'),
+(8, 4, 'Jointures de tables', 'mp3', 'fichiers/JavaScript/Jointures de tables.mp3'),
+(9, 5, 'Introduction à Ruby', 'pdf', 'fichiers/PHP/Introduction à Ruby.pdf'),
+(10, 6, 'Composants et props', 'pdf', 'fichiers/java/fichier.pdf'),
+(11, 6, 'Gestion de létat', 'pptx', 'fichiers/java/fichier.pptx'),
+(12, 7, 'Création dun projet Angular', 'pdf', 'fichiers/Ruby/Création dun projet Angular.pdf'),
+(13, 7, 'Composants et directives', 'mp4', 'fichiers/Ruby/Composants et directives.mp4'),
+(14, 8, 'Introduction à Node.js', 'pdf', 'fichiers/React/Introduction à Node.js.pdf'),
+(15, 8, 'Création dun serveur web', 'mp4', 'fichiers/React/Création dun serveur web.mp4');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cours`
+--
+
+DROP TABLE IF EXISTS `cours`;
+CREATE TABLE IF NOT EXISTS `cours` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `cours`
+--
+
+INSERT INTO `cours` (`id`, `titre`, `description`) VALUES
+(1, 'Java', 'Apprenez les bases de Java'),
+(2, 'Python', 'Découvrez comment programmer en Python'),
+(3, 'HtmlCSS', 'Créez des sites web'),
+(4, 'JavaScript', 'Découvrez comment utiliser JavaScript dans vos projets web'),
+(5, 'PHP', 'Apprenez à programmer en PHP'),
+(6, 'SQL', 'Maîtrisez les requêtes SQL'),
+(7, 'Ruby', 'Programmez en Ruby'),
+(8, 'React', 'Créez des applications web dynamiques avec React'),
+(9, 'Angular', 'Développez des applications web avec Angular'),
+(10, 'NodeJS', 'Utilisez Node.js pour créer des applications web côté serveur');
+
+--
+-- Déclencheurs `cours`
+--
+DROP TRIGGER IF EXISTS `add_topic_after_cours_insert`;
+DELIMITER $$
+CREATE TRIGGER `add_topic_after_cours_insert` AFTER INSERT ON `cours` FOR EACH ROW INSERT INTO topics_forum (titre) VALUES (NEW.titre)
+$$
+DELIMITER ;
+DROP TRIGGER IF EXISTS `delete_chapitres_after_cours_delete`;
+DELIMITER $$
+CREATE TRIGGER `delete_chapitres_after_cours_delete` AFTER DELETE ON `cours` FOR EACH ROW BEGIN
+    DELETE FROM chapitres WHERE chapitres.cours_id = OLD.id;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `messages_forum`
+--
+
+DROP TABLE IF EXISTS `messages_forum`;
+CREATE TABLE IF NOT EXISTS `messages_forum` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sujet_id` int NOT NULL,
+  `utilisateur_id` int NOT NULL,
+  `message` text NOT NULL,
+  `horodatage` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sujet_id` (`sujet_id`),
+  KEY `utilisateur_id` (`utilisateur_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `messages_forum`
+--
+
+INSERT INTO `messages_forum` (`id`, `sujet_id`, `utilisateur_id`, `message`, `horodatage`) VALUES
+(1, 1, 1, 'Comment déclarer une classe en Java ?', '2023-04-20 10:05:00'),
+(2, 1, 2, 'Vous pouvez utiliser \"public class MaClasse { ... }\".', '2023-04-20 10:10:00'),
+(3, 2, 2, 'Quels sont vos conseils pour apprendre Python rapidement ?', '2023-04-20 11:05:00'),
+(4, 2, 1, 'Pratiquez régulièrement et utilisez des ressources en ligne !', '2023-04-20 11:10:00'),
+(5, 3, 3, 'Pouvez-vous partager le code HTML ?', '2023-05-02 15:10:00'),
+(6, 3, 5, 'Avez-vous vérifié les balises de fermeture ?', '2023-05-02 15:15:00'),
+(7, 4, 4, 'Comment sélectionner des données provenant de plusieurs tables ?', '2023-04-22 14:05:00'),
+(8, 4, 2, 'Utilisez la commande JOIN !', '2023-04-22 14:10:00'),
+(9, 5, 5, 'Comment définir une fonction en Ruby ?', '2023-04-23 16:05:00'),
+(10, 5, 1, 'Vous pouvez utiliser la syntaxe \"def nom_de_fonction(parameters) ... end\".', '2023-04-23 16:10:00'),
+(11, 6, 6, 'Avez-vous bien importé la directive ?', '2023-04-25 12:05:00'),
+(12, 6, 7, 'Assurez-vous que la directive est bien définie dans votre module !', '2023-04-25 12:10:00'),
+(13, 7, 8, 'Comment créer un serveur web avec Node.js ?', '2023-04-26 09:05:00'),
+(14, 7, 1, 'Vous pouvez utiliser le module \"http\" de Node.js !', '2023-04-26 09:10:00'),
+(15, 8, 10, 'Avec Angular, vous pouvez créer des applications plus complexes que React.', '2023-04-28 11:05:00'),
+(16, 8, 8, 'Je préfère React car il est plus léger et plus facile à apprendre.', '2023-04-28 11:10:00'),
+(17, 9, 9, 'Comment optimiser les performances de mes requêtes SQL ?', '2023-04-29 13:05:00'),
+(18, 9, 3, 'Utilisez des index et limitez le nombre de données renvoyées !', '2023-04-29 13:10:00'),
+(19, 10, 10, 'Mon application React est très lente, que puis-je faire ?', '2023-05-01 10:05:00'),
+(20, 10, 6, 'Assurez-vous que vous utilisez la dernière version de React et optimisez votre code !', '2023-05-01 10:10:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `qcm`
+--
+
+DROP TABLE IF EXISTS `qcm`;
+CREATE TABLE IF NOT EXISTS `qcm` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_cours` int DEFAULT NULL,
+  `titre` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_cours` (`id_cours`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `qcm`
+--
+
+INSERT INTO `qcm` (`id`, `id_cours`, `titre`, `url`) VALUES
+(1, 1, 'Java générale', 'qcm/Java/Java générale.xml'),
+(2, 2, 'Classes', 'qcm/Python/Classes.xml');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `recommandations`
+--
+
+DROP TABLE IF EXISTS `recommandations`;
+CREATE TABLE IF NOT EXISTS `recommandations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `utilisateur_id` int NOT NULL,
+  `cours_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `utilisateur_id` (`utilisateur_id`),
+  KEY `cours_id` (`cours_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `recommandations`
+--
+
+INSERT INTO `recommandations` (`id`, `utilisateur_id`, `cours_id`) VALUES
+(1, 9, 1),
+(2, 9, 3),
+(3, 9, 4),
+(4, 9, 7),
+(5, 9, 9),
+(6, 9, 10),
+(7, 3, 1),
+(8, 3, 3),
+(9, 3, 4),
+(10, 3, 6),
+(11, 3, 7),
+(12, 3, 9),
+(13, 3, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sujets_forum`
+--
+
+DROP TABLE IF EXISTS `sujets_forum`;
+CREATE TABLE IF NOT EXISTS `sujets_forum` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `topic_id` int NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `utilisateur_id` int NOT NULL,
+  `horodatage` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `utilisateur_id` (`utilisateur_id`),
+  KEY `topic_id` (`topic_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `sujets_forum`
+--
+
+INSERT INTO `sujets_forum` (`id`, `topic_id`, `titre`, `utilisateur_id`, `horodatage`) VALUES
+(1, 2, 'Question sur Java', 1, '2023-04-20 10:00:00'),
+(2, 3, 'Conseils pour apprendre Python', 2, '2023-04-20 11:00:00'),
+(3, 4, 'Problème avec un formulaire HTML', 3, '2023-05-02 15:00:00'),
+(4, 7, 'Requêtes SQL', 4, '2023-04-22 14:00:00'),
+(5, 8, 'Comment fonctionnent les fonctions en Ruby', 5, '2023-04-23 16:00:00'),
+(6, 10, 'Problème avec une directive Angular', 6, '2023-04-25 12:00:00'),
+(7, 11, 'Création dun serveur Node.js', 7, '2023-04-26 09:00:00'),
+(8, 0, 'Quel est le meilleur framework pour créer des applications web', 8, '2023-04-28 11:00:00'),
+(9, 7, 'Comment optimiser les requêtes SQL', 9, '2023-04-29 13:00:00'),
+(10, 9, 'Problème de performance avec React', 10, '2023-05-01 10:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `topics_forum`
+--
+
+DROP TABLE IF EXISTS `topics_forum`;
+CREATE TABLE IF NOT EXISTS `topics_forum` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `titre` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `topics_forum`
+--
+
+INSERT INTO `topics_forum` (`id`, `titre`) VALUES
+(1, 'Autre'),
+(2, 'Java'),
+(3, 'Python'),
+(4, 'HtmlCSS'),
+(5, 'JavaScript'),
+(6, 'PHP'),
+(7, 'SQL'),
+(8, 'Ruby'),
+(9, 'React'),
+(10, 'Angular'),
+(11, 'NodeJS');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurs`
+--
+
+DROP TABLE IF EXISTS `utilisateurs`;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nom_utilisateur` varchar(255) NOT NULL,
+  `email` varchar(191) NOT NULL,
+  `mot_de_passe` varchar(255) NOT NULL,
+  `premiere_connexion` tinyint(1) DEFAULT '1',
+  `role` enum('admin','utilisateur') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id`, `nom_utilisateur`, `email`, `mot_de_passe`, `premiere_connexion`, `role`) VALUES
+(1, 'Alice', 'alice@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur'),
+(2, 'Bob', 'bob@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur'),
+(3, 'Charles', 'charles@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 0, 'admin'),
+(4, 'David', 'david@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur'),
+(5, 'Emma', 'emma@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur'),
+(6, 'Fabien', 'fabien@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'admin'),
+(7, 'Gina', 'gina@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur'),
+(8, 'Hugo', 'hugo@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur'),
+(9, 'Iris', 'iris@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 0, 'admin'),
+(10, 'Julien', 'julien@example.com', '$2y$10$LuEXdQOqkstAW5IibJG7.uEP61KC2UuVeScyXyRjcoZj.MHn5ZuO.', 1, 'utilisateur');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

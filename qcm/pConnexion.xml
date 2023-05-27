@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+  <question id="1">
+    <titre>Connais-tu le langage Java</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="2">
+    <titre>Connais-tu le langage Python</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="3">
+    <titre>Connais-tu le langage HtmlCSS</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="4">
+    <titre>Connais-tu le langage JavaScript</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="5">
+    <titre>Connais-tu le langage PHP</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="6">
+    <titre>Connais-tu le langage SQL</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="7">
+    <titre>Connais-tu le langage Ruby</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="8">
+    <titre>Connais-tu le langage React</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="9">
+    <titre>Connais-tu le langage Angular</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+  <question id="10">
+    <titre>Connais-tu le langage NodeJS</titre>
+    <choix>
+      <oui>Oui</oui>
+      <non>Non</non>
+    </choix>
+  </question>
+</quiz>

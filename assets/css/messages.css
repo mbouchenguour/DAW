@@ -1,0 +1,114 @@
+/* Appliquer une police de caractères moderne */
+body {
+    font-family: "Open Sans", sans-serif;
+}
+ header {
+    background-color: rgba(251, 129, 15, 0.753);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+   
+    }
+/* Appliquer des styles de mise en page pour les messages */
+.features2 {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.features2 h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.features2 ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.features2 li {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.features2 .message-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.features2 .message-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.features2 .message-timestamp {
+    font-size: 14px;
+    color: #999;
+}
+
+.features2 .message-content {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.features2 form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.features2 label {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.features2 textarea {
+    height: 100px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.features2 button[type="submit"] {
+    padding: 10px;
+	background-color: rgb(255, 123, 0);
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.features2 button[type="submit"]:hover {
+     background-color: rgba(251, 129, 15, 0.753);
+}
+
+
+
+.features2 a {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    color: rgb(255, 123, 0);
+    text-decoration: none;
+}
+
+.features2 a:hover {
+    text-decoration: underline;
+}
+
